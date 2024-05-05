@@ -13,6 +13,7 @@ pub struct SysTick {
 impl SysTick {
     pub fn new(name: &str) -> Option<Box<dyn Peripheral>> {
         if name == "STK" {
+            debug!("Passed here!");
             Some(Box::new(Self::default()))
         } else {
             None
@@ -47,7 +48,10 @@ impl Peripheral for SysTick {
                 self.val_toggle = !self.val_toggle;
                 if self.val_toggle { 0 } else { self.reload/2 }
             }
-            _ => 0
+            _ => {
+                error!("NYI - {} READ at offset = {:08x}", "SYSTICK", offset);
+                std::process::exit(-1);
+            }
         }
     }
 
@@ -63,7 +67,10 @@ impl Peripheral for SysTick {
                 self.reload = value;
                 self.set_nvic_systick_period(sys);
             }
-            _ => {}
+            _ => {
+                error!("NYI - {} WRITE at offset = {:08x} with value = {:08x}", "SYSTICK", offset, value);
+                std::process::exit(-1);
+            }
         }
     }
 }
