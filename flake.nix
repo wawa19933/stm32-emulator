@@ -21,6 +21,7 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.devenv.flakeModule
+        inputs.flake-parts.flakeModules.easyOverlay
       ];
       systems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
 
@@ -47,6 +48,10 @@
         in rec {
           stm32-emulator = cargoNix.rootCrate.build;
           default = stm32-emulator;
+        };
+
+        overlayAttrs = {
+          inherit (config.packages) stm32-emulator;
         };
 
         devenv.shells.default = {
