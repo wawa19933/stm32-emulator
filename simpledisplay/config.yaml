@@ -1,0 +1,28 @@
+cpu:
+  svd: stm32f103.svd
+  vector_table: 0x08000000
+regions:
+  - name: ROM
+    start: 0x08000000
+    load: firmware.bin
+    size: 0x80000
+  - name: RAM
+    start: 0x20000000
+    size: 0x20000
+framebuffers:
+  - name: Touchscreen
+    width: 160
+    height: 128
+    mode: rgb565
+    sdl: true
+devices:
+  usart_probe:
+    - peripheral: USART1
+  display_spi:
+    - peripheral: SPI1
+      cmd_pin : PC11
+      framebuffer: Touchscreen
+  #lcd:
+  #  - peripheral: SW_SPI_LCD
+  #    framebuffer: LCD
+

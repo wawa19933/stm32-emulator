@@ -189,10 +189,10 @@ impl Peripheral for Gpio {
                 });
                 self.pupd = value;
             }
-            0x0010 => {
+            0x0014 => {
                 // input data register. read-only
             }
-            0x0014 => {
+            0x0010 => {
                 let mut gpio = sys.p.gpio.borrow_mut();
                 Self::iter_port_reg_changes(self.od, value, 1, |pin, v| {
                     gpio.write_port(sys, self.port, pin, v != 0);

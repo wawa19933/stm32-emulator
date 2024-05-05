@@ -20,7 +20,7 @@ pub struct DisplayConfig {
 #[derive(Debug, Deserialize)]
 pub struct ReplyConfig {
     pub cmd: u8,
-    data: Vec<u16>,
+    pub data: Vec<u16>,
 }
 
 pub struct Display {
