@@ -17,6 +17,7 @@ pub struct UsartProbe {
     pub config: UsartProbeConfig,
     name: String,
     rx: Vec<u8>,
+    tx: Option<Vec<u8>>,
 }
 
 impl UsartProbe {
@@ -32,7 +33,11 @@ impl ExtDevice<(), u8> for UsartProbe {
     }
 
     fn read(&mut self, _sys: &System, _addr: ()) -> u8 {
-        0
+        if let Some(tx) = self.tx.as_mut() {
+          tx.pop().unwrap_or(0)
+        } else {
+          0
+        }
     }
 
     fn write(&mut self, _sys: &System, _addr: (), v: u8) {
