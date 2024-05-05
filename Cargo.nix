@@ -470,6 +470,19 @@ rec {
         };
         resolvedDefaultFeatures = [ "default" "std" ];
       };
+      "elf" = rec {
+        crateName = "elf";
+        version = "0.7.4";
+        edition = "2021";
+        sha256 = "0yyij25ps8mln1s1xzwggjr88gb2b35c8jf8az25dmfvfaar0ia4";
+        authors = [
+          "Christopher Cole <chris.cole.09@gmail.com>"
+        ];
+        features = {
+          "default" = [ "std" "to_str" ];
+        };
+        resolvedDefaultFeatures = [ "default" "std" "to_str" ];
+      };
       "env_logger" = rec {
         crateName = "env_logger";
         version = "0.9.3";
@@ -1542,6 +1555,10 @@ rec {
           {
             name = "clap-num";
             packageId = "clap-num";
+          }
+          {
+            name = "elf";
+            packageId = "elf";
           }
           {
             name = "env_logger";
